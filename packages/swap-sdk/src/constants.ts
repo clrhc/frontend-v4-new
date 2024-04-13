@@ -247,16 +247,16 @@ export const WETH9 = {
     ChainId.ETHERLINK,
     '0x8DEF68408Bc96553003094180E5C90d9fe5b88C1',
     18,
-    'ETH',
-    'Ether',
+    'WETH',
+    'Wrapped Ether',
     'https://ethereum.org'
   ),
   [ChainId.ETHERLINK_TESTNET]: new ERC20Token(
     ChainId.ETHERLINK_TESTNET,
     '0x8DEF68408Bc96553003094180E5C90d9fe5b88C1',
     18,
-    'ETH',
-    'Ether',
+    'WETH',
+    'Wrapped Ether',
     'https://ethereum.org'
   ),
 }

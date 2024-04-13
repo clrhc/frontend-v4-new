@@ -18,6 +18,8 @@ export const feeOnTransferDetectorAddresses = {
   [ChainId.ZKSYNC_TESTNET]: '0x869505373d830104130F95c1E7d578dE7E58C0a8',
   [ChainId.LINEA]: '0xD8b14F915b1b4b1c4EE4bF8321Bea018E72E5cf3',
   [ChainId.LINEA_TESTNET]: '0x3412378f17B1b44E8bcFD157EcE1a4f59DA5A77a',
+  [ChainId.ETHERLINK]: '0x49275e8288fDd232B1F1b2f16c7Ce0dd7dA7C0cf',
+  [ChainId.ETHERLINK_TESTNET]: '0x49275e8288fDd232B1F1b2f16c7Ce0dd7dA7C0cf',
 } as const
 
 const getFeeOnTransferDetectorContract = <TPublicClient extends PublicClient>(publicClient: TPublicClient) => {

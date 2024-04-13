@@ -23,6 +23,31 @@ import {
 import mapValues from 'lodash/mapValues'
 import { arbitrum, base, bsc, linea, mainnet, opBNB, polygonZkEvm, zkSync } from 'wagmi/chains'
 
+const etherlinkTestnet = {
+  id: 128123,
+  name: 'Etherlink Testnet',
+  network: 'etherlink-testnet',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'tez',
+    symbol: 'XTZ',
+  },
+  rpcUrls: {
+    public: { http: ['https://node.ghostnet.etherlink.com'] },
+    default: { http: ['https://node.ghostnet.etherlink.com'] },
+  },
+  blockExplorers: {
+    etherscan: { name: 'Testnet Etherscout', url: 'https://testnet-explorer.etherlink.com/' },
+    default: { name: 'Testnet Etherscout', url: 'https://testnet-explorer.etherlink.com/' },
+  },
+  contracts: {
+    multicall3: {
+      address: '0xcA11bde05977b3631167028862bE2a173976CA11',
+      blockCreated: 500,
+    },
+  },
+} as const satisfies Chain
+
 const etherlink = {
   id: 42793,
   name: 'Etherlink',
@@ -46,7 +71,7 @@ const etherlink = {
       blockCreated: 500,
     },
   },
-} as const
+} as const satisfies Chain
 
 export type MultiChainName =
   | 'BSC'
@@ -71,7 +96,6 @@ export const multiChainName: Record<number | string, MultiChainNameExtend> = {
   [ChainId.BASE]: 'BASE',
   [ChainId.OPBNB]: 'OPBNB',
   [ChainId.ARBITRUM_ONE]: 'ARB',
-  [ChainId.ETHERLINK_TESTNET]: 'ETHERLINK_TESTNET',
   [ChainId.ETHERLINK]: 'ETHERLINK',
 }
 
@@ -102,7 +126,7 @@ export const multiChainBlocksClient: Record<MultiChainNameExtend, string> = {
   LINEA: BLOCKS_CLIENT_LINEA,
   BASE: BLOCKS_CLIENT_BASE,
   OPBNB: BLOCKS_CLIENT_OPBNB,
-  ETHERLINK_TESTNET: BLOCKS_CLIENT_ETHERLINK_TESTNET,
+  ETHERLINK_TESTNET: 'https://api.studio.thegraph.com/query/69431/blocks-etherlink-testnet/version/latest',
   ETHERLINK: BLOCKS_CLIENT_ETHERLINK,
 }
 
@@ -116,6 +140,7 @@ export const multiChainStartTime = {
   BASE: 1693483200,
   OPBNB: 1695945600,
   ETHERLINK: 1695945600,
+  ETHERLINK_TESTNET: 1695945600,
 }
 
 export const multiChainId: Record<MultiChainName, ChainId> = {
@@ -128,6 +153,7 @@ export const multiChainId: Record<MultiChainName, ChainId> = {
   BASE: ChainId.BASE,
   OPBNB: ChainId.OPBNB,
   ETHERLINK: ChainId.ETHERLINK,
+  ETHERLINK_TESTNET: ChainId.ETHERLINK_TESTNET,
 }
 
 export const multiChainPaths = {
@@ -140,6 +166,7 @@ export const multiChainPaths = {
   [ChainId.BASE]: '/base',
   [ChainId.OPBNB]: '/opbnb',
   [ChainId.ETHERLINK]: '/etherlink',
+  [ChainId.ETHERLINK_TESTNET]: '/etherlink-testnet',
 }
 
 export const multiChainQueryClient = {
@@ -152,6 +179,7 @@ export const multiChainQueryClient = {
   BASE: v2Clients[ChainId.BASE],
   OPBNB: v2Clients[ChainId.OPBNB],
   ETHERLINK: v2Clients[ChainId.ETHERLINK],
+  ETHERLINK_TESTNET: v2Clients[ChainId.ETHERLINK_TESTNET],
 }
 
 export const multiChainQueryStableClient = {
@@ -201,6 +229,7 @@ export const multiChainTokenWhiteList: Record<MultiChainName, string[]> = mapVal
     BASE: [],
     OPBNB: [],
     ETHERLINK: [],
+    ETHERLINK_TESTNET: [],
   },
   (val) => val.map((address) => address.toLowerCase()),
 )
@@ -233,4 +262,4 @@ export const subgraphTokenSymbol = {
 
 export const checkIsStableSwap = () => window.location.href.includes('stableSwap')
 
-export const ChainLinkSupportChains = [ChainId.BSC, ChainId.BSC_TESTNET]
+export const ChainLinkSupportChains = [ChainId.BSC, ChainId.BSC_TESTNET, ChainId.ETHERLINK_TESTNET, ChainId.ETHERLINK]

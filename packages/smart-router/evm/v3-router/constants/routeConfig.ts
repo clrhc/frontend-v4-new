@@ -11,4 +11,10 @@ export const ROUTE_CONFIG_BY_CHAIN: { [key in ChainId]?: Partial<RouteConfig> } 
   [ChainId.BASE]: {
     distributionPercent: 10,
   },
+  [ChainId.ETHERLINK]: {
+    distributionPercent: 10,
+  },
+  [ChainId.ETHERLINK_TESTNET]: {
+    distributionPercent: 10,
+  },
 }

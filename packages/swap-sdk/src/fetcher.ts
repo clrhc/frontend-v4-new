@@ -9,12 +9,66 @@ import { pancakePairV2ABI } from './abis/IPancakePair'
 
 let TOKEN_DECIMALS_CACHE: { [chainId: number]: { [address: string]: number } } = {
   [ChainId.BSC]: {},
+  [ChainId.ETHERLINK]: {},
+  [ChainId.ETHERLINK_TESTNET]: {},
 }
+
+const etherlinkTestnet = {
+  id: 128123,
+  name: 'Etherlink Testnet',
+  network: 'etherlink-testnet',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'tez',
+    symbol: 'XTZ',
+  },
+  rpcUrls: {
+    public: { http: ['https://node.ghostnet.etherlink.com'] },
+    default: { http: ['https://node.ghostnet.etherlink.com'] },
+  },
+  blockExplorers: {
+    etherscan: { name: 'Testnet Etherscout', url: 'https://testnet-explorer.etherlink.com/' },
+    default: { name: 'Testnet Etherscout', url: 'https://testnet-explorer.etherlink.com/' },
+  },
+  contracts: {
+    multicall3: {
+      address: '0xcA11bde05977b3631167028862bE2a173976CA11',
+      blockCreated: 500,
+    },
+  },
+} as const satisfies Chain
+
+const etherlink = {
+  id: 42793,
+  name: 'Etherlink',
+  network: 'etherlink',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'tez',
+    symbol: 'XTZ',
+  },
+  rpcUrls: {
+    public: { http: ['https://node.etherlink.com'] },
+    default: { http: ['https://node.etherlink.com'] },
+  },
+  blockExplorers: {
+    etherscan: { name: 'Etherscout', url: 'https://explorer.etherlink.com/' },
+    default: { name: 'Etherscout', url: 'https://explorer.etherlink.com/' },
+  },
+  contracts: {
+    multicall3: {
+      address: '0xcA11bde05977b3631167028862bE2a173976CA11',
+      blockCreated: 500,
+    },
+  },
+} as const satisfies Chain
 
 const ethClient = createPublicClient({ chain: mainnet, transport: http() })
 const bscClient = createPublicClient({ chain: bsc, transport: http() })
 const bscTestnetClient = createPublicClient({ chain: bscTestnet, transport: http() })
 const goerliClient = createPublicClient({ chain: goerli, transport: http() })
+const etherlinkClient = createPublicClient({ chain: etherlink, transport: http() })
+const etherlinkTestnetClient = createPublicClient({ chain: etherlinkTestnet, transport: http() })
 
 const getDefaultClient = (chainId: ChainId): PublicClient => {
   switch (chainId) {
@@ -26,6 +80,10 @@ const getDefaultClient = (chainId: ChainId): PublicClient => {
       return bscTestnetClient
     case ChainId.GOERLI:
       return goerliClient
+    case ChainId.ETHERLINK:
+      return etherlinkClient
+    case ChainId.ETHERLINK_TESTNET:
+      return etherlinkTestnetClient
     default:
       return bscClient
   }

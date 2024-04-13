@@ -18,8 +18,8 @@ const CACHE_TIME = {
   [ChainId.GOERLI]: 10,
   [ChainId.BSC]: 2,
   [ChainId.BSC_TESTNET]: 2,
-  [ChainId.ETHERLINK_TESTNET]: 10,
-  [ChainId.ETHERLINK]: 2,
+  [ChainId.ETHERLINK_TESTNET]: 2,
+  [ChainId.ETHERLINK]: 10,
 }
 
 const onChainQuoteProvider = SmartRouter.createQuoteProvider({ onChainProvider: viemProviders })
